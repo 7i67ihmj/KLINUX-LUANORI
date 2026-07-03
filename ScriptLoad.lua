@@ -811,27 +811,26 @@ do
 api.script_id = isSupport
 
 function api.check_key(key)
-    local http = game:GetService("HttpService")
-    local data = {
-        key = key,
-        hwid = tostring(tick())
-    }
+    local hwid = tostring(tick())
+    local url = API_URL .. "/api/check_key?key=" .. key .. "&hwid=" .. hwid
+    
+    print("[DEBUG] Checking key at: " .. url)
     
     local success, response = pcall(function()
-        return http:PostAsync(
-            API_URL .. "/api/check_key",
-            http:JSONEncode(data),
-            Enum.HttpContentType.ApplicationJson
-        )
+        return game:HttpGet(url)
     end)
     
     if not success then
+        print("[DEBUG] Error: " .. tostring(response))
         return {
             code = "NETWORK_ERROR",
             message = "Cannot connect to server"
         }
     end
     
+    print("[DEBUG] Response: " .. response)
+    
+    local http = game:GetService("HttpService")
     return http:JSONDecode(response)
 end
 
