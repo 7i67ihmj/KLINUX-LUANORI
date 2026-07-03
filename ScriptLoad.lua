@@ -845,18 +845,19 @@ end
 		HOHO_Gen4:Destroy()
 	end
 
-	local do_check_key = function(key)
+		local do_check_key = function(key)
 		if checking_key then return end
 		checking_key = true
 		key = key:gsub("[\r\n%z]", " "):gsub("[ \t]", ""):gsub("[ \n]", ""):gsub("[ \t]+%f[\r\n%z]", "")
 		local status = api.check_key(key);
 
-		-- ===== XỬ LÝ KEY MỚI =====
+		-- ===== XỬ LÝ KEY MỚI TỪ SERVER =====
 		if status.data and status.data.new_key then
 			key = status.data.new_key
 			Frame.Textbox.Text = key
 			writefile("HohoKeyV4.txt", key)
-			-- Kiểm tra lại với key mới
+			print("[AUTO] Đã nhận key mới: " .. key)
+			-- Check lại với key mới
 			status = api.check_key(key)
 		end
 		-- ===== KẾT THÚC =====
