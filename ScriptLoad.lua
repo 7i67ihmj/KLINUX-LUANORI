@@ -7,7 +7,7 @@ local CoreGui = game:GetService("CoreGui")
 local Debris = game:GetService("Debris")
 local StarterGui = game:GetService("StarterGui")
 local ContentProvider = game:GetService("ContentProvider")
-local API_URL = "https://your-domain.vercel.app"  -- ← ĐỔI DOMAIN CỦA BẠN
+local API_URL = "https://linuxkey.luanori.space"  -- ← ĐỔI DOMAIN CỦA BẠN
 
 repeat task.wait() until game:IsLoaded() and Players.LocalPlayer
 
