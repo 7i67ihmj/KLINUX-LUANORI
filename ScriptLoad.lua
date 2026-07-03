@@ -852,6 +852,16 @@ end
 		key = key:gsub("[\r\n%z]", " "):gsub("[ \t]", ""):gsub("[ \n]", ""):gsub("[ \t]+%f[\r\n%z]", "")
 		local status = api.check_key(key);
 
+		-- ===== XỬ LÝ KEY MỚI =====
+		if status.data and status.data.new_key then
+			key = status.data.new_key
+			Frame.Textbox.Text = key
+			writefile("HohoKeyV4.txt", key)
+			-- Kiểm tra lại với key mới
+			status = api.check_key(key)
+		end
+		-- ===== KẾT THÚC =====
+
 		StarterGui:SetCore("SendNotification",{
 			Title = "Key System",
 			Text = "[".. status.code .. "] " .. status.message,
@@ -867,9 +877,6 @@ end
 			TweenService:Create(GET_KEY,INFO_DOT25_QUAD,{GroupTransparency = 1}):Play()
 
 			delay(0.2, destroyUI)
-
-			-- Debris:AddItem(HOHO_Passcheck,.25)
-			-- Debris:AddItem(HOHO_Gen4,.25)
 
 			writefile("HohoKeyV4.txt", key)
 
